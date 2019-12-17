@@ -1,0 +1,23 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#", 
+    "$id": "TargetServiceSchema.schema.json", 
+    "title": "TargetServiceSchema", 
+    "definitions": {
+        "TargetServiceSchema": {
+            "type": "object", 
+            "properties": {
+                "@schemaLocation": {
+                    "type": "string"
+                }, 
+                "@type": {
+                    "type": "string"
+                }
+            }, 
+            "allOf": [
+                {
+                    "$ref": "CommonComponents.schema.json#/definitions/polymorphicPattern"
+                }
+            ]
+        }
+    }
+}

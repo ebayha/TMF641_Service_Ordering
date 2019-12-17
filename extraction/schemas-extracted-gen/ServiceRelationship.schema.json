@@ -1,0 +1,25 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#", 
+    "$id": "ServiceRelationship.schema.json", 
+    "title": "ServiceRelationship", 
+    "definitions": {
+        "ServiceRelationship": {
+            "type": "object", 
+            "description": "Linked Services to the one instantiate", 
+            "properties": {
+                "service": {
+                    "$ref": "Service.schema.json#/definitions/Service"
+                }, 
+                "type": {
+                    "type": "string", 
+                    "description": "Relationship type. It can be : \u201creliesOn\u201d if the Service needs another already owned Service to rely on (e.g. an option on an already owned mobile access Service) or \u201ctargets\u201d or \u201cisTargeted\u201d (depending on the way of expressing the link) for any other kind of links that may be useful"
+                }
+            }, 
+            "allOf": [
+                {
+                    "$ref": "CommonComponents.schema.json#/definitions/polymorphicPattern"
+                }
+            ]
+        }
+    }
+}

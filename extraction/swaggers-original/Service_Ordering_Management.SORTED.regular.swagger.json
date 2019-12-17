@@ -1,0 +1,1625 @@
+{
+    "swagger": "2.0", 
+    "info": {
+        "title": "API ServiceOrdering", 
+        "description": "## TMF API Reference : TMF 641 - Service Ordering Management\n\n## Release : 18.0 - May 2018\n\nThe Service Order API provides a standardized mechanism for managing Service Order, a type of order which can be used to place an order between a customer and a service provider or between a service provider and a partner and vice versa.\n\n### Service Order resource\nA service order will describe a list of service order items.  A service order item references an action on an existing  or  future  service.  By  service  we  designed  Customer Facing  Service  (CFS)  as  well  as  Resource Facing Service (RFS).\nFrom a component perspective, a service order should be available\n- from a Service Orchestration Component (and it could mix CFS and RFS)\n- from an Infrastructure Control & Management component (and it would have only RFS)\n\n### Service Order API performs the following operations on service order :\n- Retrieval of a service order or a collection of service orders depending on filter criteria\n- Partial update of a service order (including updating rules)\n- Creation of a service order (including default values and creation rules)\n- Deletion of service order (for administration purposes)\n- Notification of events on Service order\n\nCopyright \u00a9 TM Forum 2018. All Rights Reserved", 
+        "version": "3.0.0", 
+        "x-logo": {
+            "backgroundColor": "#FFFFFF", 
+            "url": "/redoc/logo.png"
+        }
+    }, 
+    "host": "serverRoot", 
+    "basePath": "/tmf-api/serviceOrdering/v3/", 
+    "schemes": [
+        "https"
+    ], 
+    "consumes": [
+        "application/json;charset=utf-8"
+    ], 
+    "produces": [
+        "application/json;charset=utf-8"
+    ], 
+    "paths": {
+        "/hub": {
+            "get": {
+                "operationId": "hubFind", 
+                "summary": "find hub", 
+                "description": "\n\nSpecific business errors for current operation will be encapsulated in\n\nHTTP Response 422 Unprocessable entity\n", 
+                "tags": [
+                    "Hub"
+                ], 
+                "parameters": [
+                    {
+                        "description": "", 
+                        "in": "query", 
+                        "name": "fields", 
+                        "required": false, 
+                        "type": "string"
+                    }
+                ], 
+                "responses": {
+                    "200": {
+                        "description": "Success", 
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/Hub"
+                            }, 
+                            "type": "array"
+                        }
+                    }, 
+                    "400": {
+                        "description": "Bad Request\n\nList of supported error codes:\n- 20: Invalid URL parameter value\n- 21: Missing body\n- 22: Invalid body\n- 23: Missing body field\n- 24: Invalid body field\n- 25: Missing header\n- 26: Invalid header value\n- 27: Missing query-string parameter\n- 28: Invalid query-string parameter value", 
+                        "schema": {
+                            "$ref": "#/definitions/ErrorRepresentation"
+                        }
+                    }, 
+                    "401": {
+                        "description": "Unauthorized\n\nList of supported error codes:\n- 40: Missing credentials\n- 41: Invalid credentials\n- 42: Expired credentials", 
+                        "schema": {
+                            "$ref": "#/definitions/ErrorRepresentation"
+                        }
+                    }, 
+                    "403": {
+                        "description": "Forbidden\n\nList of supported error codes:\n- 50: Access denied\n- 51: Forbidden requester\n- 52: Forbidden user\n- 53: Too many requests", 
+                        "schema": {
+                            "$ref": "#/definitions/ErrorRepresentation"
+                        }
+                    }, 
+                    "404": {
+                        "description": "Not Found\n\nList of supported error codes:\n- 60: Resource not found", 
+                        "schema": {
+                            "$ref": "#/definitions/ErrorRepresentation"
+                        }
+                    }, 
+                    "405": {
+                        "description": "Method Not Allowed\n\nList of supported error codes:\n- 61: Method not allowed", 
+                        "schema": {
+                            "$ref": "#/definitions/ErrorRepresentation"
+                        }
+                    }, 
+                    "409": {
+                        "description": "Conflict\n\n", 
+                        "schema": {
+                            "$ref": "#/definitions/ErrorRepresentation"
+                        }
+                    }, 
+                    "422": {
+                        "description": "Unprocessable entity\n\nFunctional error", 
+                        "schema": {
+                            "$ref": "#/definitions/ErrorRepresentation"
+                        }
+                    }, 
+                    "500": {
+                        "description": "Internal Server Error\n\nList of supported error codes:\n- 1: Internal error", 
+                        "schema": {
+                            "$ref": "#/definitions/ErrorRepresentation"
+                        }
+                    }, 
+                    "503": {
+                        "description": "Service Unavailable\n\nList of supported error codes:\n- 5: The service is temporarily unavailable\n- 6: Orange API is over capacity, retry later !", 
+                        "schema": {
+                            "$ref": "#/definitions/ErrorRepresentation"
+                        }
+                    }
+                }, 
+                "deprecated": false
+            }, 
+            "post": {
+                "operationId": "hubCreate", 
+                "summary": "create hub", 
+                "description": "\n\nSpecific business errors for current operation will be encapsulated in\n\nHTTP Response 422 Unprocessable entity\n", 
+                "tags": [
+                    "Hub"
+                ], 
+                "parameters": [
+                    {
+                        "description": "", 
+                        "in": "body", 
+                        "name": "Hub", 
+                        "required": true, 
+                        "schema": {
+                            "$ref": "#/definitions/HubInput"
+                        }
+                    }
+                ], 
+                "responses": {
+                    "201": {
+                        "description": "Success", 
+                        "schema": {
+                            "$ref": "#/definitions/Hub"
+                        }
+                    }, 
+                    "400": {
+                        "description": "Bad Request\n\nList of supported error codes:\n- 20: Invalid URL parameter value\n- 21: Missing body\n- 22: Invalid body\n- 23: Missing body field\n- 24: Invalid body field\n- 25: Missing header\n- 26: Invalid header value\n- 27: Missing query-string parameter\n- 28: Invalid query-string parameter value", 
+                        "schema": {
+                            "$ref": "#/definitions/ErrorRepresentation"
+                        }
+                    }, 
+                    "401": {
+                        "description": "Unauthorized\n\nList of supported error codes:\n- 40: Missing credentials\n- 41: Invalid credentials\n- 42: Expired credentials", 
+                        "schema": {
+                            "$ref": "#/definitions/ErrorRepresentation"
+                        }
+                    }, 
+                    "403": {
+                        "description": "Forbidden\n\nList of supported error codes:\n- 50: Access denied\n- 51: Forbidden requester\n- 52: Forbidden user\n- 53: Too many requests", 
+                        "schema": {
+                            "$ref": "#/definitions/ErrorRepresentation"
+                        }
+                    }, 
+                    "404": {
+                        "description": "Not Found\n\nList of supported error codes:\n- 60: Resource not found", 
+                        "schema": {
+                            "$ref": "#/definitions/ErrorRepresentation"
+                        }
+                    }, 
+                    "405": {
+                        "description": "Method Not Allowed\n\nList of supported error codes:\n- 61: Method not allowed", 
+                        "schema": {
+                            "$ref": "#/definitions/ErrorRepresentation"
+                        }
+                    }, 
+                    "409": {
+                        "description": "Conflict\n\n", 
+                        "schema": {
+                            "$ref": "#/definitions/ErrorRepresentation"
+                        }
+                    }, 
+                    "422": {
+                        "description": "Unprocessable entity\n\nFunctional error", 
+                        "schema": {
+                            "$ref": "#/definitions/ErrorRepresentation"
+                        }
+                    }, 
+                    "500": {
+                        "description": "Internal Server Error\n\nList of supported error codes:\n- 1: Internal error", 
+                        "schema": {
+                            "$ref": "#/definitions/ErrorRepresentation"
+                        }
+                    }, 
+                    "503": {
+                        "description": "Service Unavailable\n\nList of supported error codes:\n- 5: The service is temporarily unavailable\n- 6: Orange API is over capacity, retry later !", 
+                        "schema": {
+                            "$ref": "#/definitions/ErrorRepresentation"
+                        }
+                    }
+                }, 
+                "deprecated": false
+            }
+        }, 
+        "/hub/{hubId}": {
+            "get": {
+                "operationId": "hubGet", 
+                "summary": "get hub", 
+                "description": "\n\nSpecific business errors for current operation will be encapsulated in\n\nHTTP Response 422 Unprocessable entity\n", 
+                "tags": [
+                    "Hub"
+                ], 
+                "parameters": [
+                    {
+                        "description": "", 
+                        "in": "path", 
+                        "name": "hubId", 
+                        "required": true, 
+                        "type": "string"
+                    }, 
+                    {
+                        "description": "", 
+                        "in": "query", 
+                        "name": "fields", 
+                        "required": false, 
+                        "type": "string"
+                    }
+                ], 
+                "responses": {
+                    "200": {
+                        "description": "Success", 
+                        "schema": {
+                            "$ref": "#/definitions/Hub"
+                        }
+                    }, 
+                    "400": {
+                        "description": "Bad Request\n\nList of supported error codes:\n- 20: Invalid URL parameter value\n- 21: Missing body\n- 22: Invalid body\n- 23: Missing body field\n- 24: Invalid body field\n- 25: Missing header\n- 26: Invalid header value\n- 27: Missing query-string parameter\n- 28: Invalid query-string parameter value", 
+                        "schema": {
+                            "$ref": "#/definitions/ErrorRepresentation"
+                        }
+                    }, 
+                    "401": {
+                        "description": "Unauthorized\n\nList of supported error codes:\n- 40: Missing credentials\n- 41: Invalid credentials\n- 42: Expired credentials", 
+                        "schema": {
+                            "$ref": "#/definitions/ErrorRepresentation"
+                        }
+                    }, 
+                    "403": {
+                        "description": "Forbidden\n\nList of supported error codes:\n- 50: Access denied\n- 51: Forbidden requester\n- 52: Forbidden user\n- 53: Too many requests", 
+                        "schema": {
+                            "$ref": "#/definitions/ErrorRepresentation"
+                        }
+                    }, 
+                    "404": {
+                        "description": "Not Found\n\nList of supported error codes:\n- 60: Resource not found", 
+                        "schema": {
+                            "$ref": "#/definitions/ErrorRepresentation"
+                        }
+                    }, 
+                    "405": {
+                        "description": "Method Not Allowed\n\nList of supported error codes:\n- 61: Method not allowed", 
+                        "schema": {
+                            "$ref": "#/definitions/ErrorRepresentation"
+                        }
+                    }, 
+                    "409": {
+                        "description": "Conflict\n\n", 
+                        "schema": {
+                            "$ref": "#/definitions/ErrorRepresentation"
+                        }
+                    }, 
+                    "422": {
+                        "description": "Unprocessable entity\n\nFunctional error", 
+                        "schema": {
+                            "$ref": "#/definitions/ErrorRepresentation"
+                        }
+                    }, 
+                    "500": {
+                        "description": "Internal Server Error\n\nList of supported error codes:\n- 1: Internal error", 
+                        "schema": {
+                            "$ref": "#/definitions/ErrorRepresentation"
+                        }
+                    }, 
+                    "503": {
+                        "description": "Service Unavailable\n\nList of supported error codes:\n- 5: The service is temporarily unavailable\n- 6: Orange API is over capacity, retry later !", 
+                        "schema": {
+                            "$ref": "#/definitions/ErrorRepresentation"
+                        }
+                    }
+                }, 
+                "deprecated": false
+            }, 
+            "delete": {
+                "operationId": "hubDelete", 
+                "summary": "delete hub", 
+                "description": "\n\nSpecific business errors for current operation will be encapsulated in\n\nHTTP Response 422 Unprocessable entity\n", 
+                "tags": [
+                    "Hub"
+                ], 
+                "parameters": [
+                    {
+                        "description": "", 
+                        "in": "path", 
+                        "name": "hubId", 
+                        "required": true, 
+                        "type": "string"
+                    }
+                ], 
+                "responses": {
+                    "204": {
+                        "description": "Success"
+                    }, 
+                    "400": {
+                        "description": "Bad Request\n\nList of supported error codes:\n- 20: Invalid URL parameter value\n- 21: Missing body\n- 22: Invalid body\n- 23: Missing body field\n- 24: Invalid body field\n- 25: Missing header\n- 26: Invalid header value\n- 27: Missing query-string parameter\n- 28: Invalid query-string parameter value", 
+                        "schema": {
+                            "$ref": "#/definitions/ErrorRepresentation"
+                        }
+                    }, 
+                    "401": {
+                        "description": "Unauthorized\n\nList of supported error codes:\n- 40: Missing credentials\n- 41: Invalid credentials\n- 42: Expired credentials", 
+                        "schema": {
+                            "$ref": "#/definitions/ErrorRepresentation"
+                        }
+                    }, 
+                    "403": {
+                        "description": "Forbidden\n\nList of supported error codes:\n- 50: Access denied\n- 51: Forbidden requester\n- 52: Forbidden user\n- 53: Too many requests", 
+                        "schema": {
+                            "$ref": "#/definitions/ErrorRepresentation"
+                        }
+                    }, 
+                    "404": {
+                        "description": "Not Found\n\nList of supported error codes:\n- 60: Resource not found", 
+                        "schema": {
+                            "$ref": "#/definitions/ErrorRepresentation"
+                        }
+                    }, 
+                    "405": {
+                        "description": "Method Not Allowed\n\nList of supported error codes:\n- 61: Method not allowed", 
+                        "schema": {
+                            "$ref": "#/definitions/ErrorRepresentation"
+                        }
+                    }, 
+                    "409": {
+                        "description": "Conflict\n\n", 
+                        "schema": {
+                            "$ref": "#/definitions/ErrorRepresentation"
+                        }
+                    }, 
+                    "422": {
+                        "description": "Unprocessable entity\n\nFunctional error", 
+                        "schema": {
+                            "$ref": "#/definitions/ErrorRepresentation"
+                        }
+                    }, 
+                    "500": {
+                        "description": "Internal Server Error\n\nList of supported error codes:\n- 1: Internal error", 
+                        "schema": {
+                            "$ref": "#/definitions/ErrorRepresentation"
+                        }
+                    }, 
+                    "503": {
+                        "description": "Service Unavailable\n\nList of supported error codes:\n- 5: The service is temporarily unavailable\n- 6: Orange API is over capacity, retry later !", 
+                        "schema": {
+                            "$ref": "#/definitions/ErrorRepresentation"
+                        }
+                    }
+                }, 
+                "deprecated": false
+            }, 
+            "put": {
+                "operationId": "hubUpdate", 
+                "summary": "update hub", 
+                "description": "\n\nSpecific business errors for current operation will be encapsulated in\n\nHTTP Response 422 Unprocessable entity\n", 
+                "tags": [
+                    "Hub"
+                ], 
+                "parameters": [
+                    {
+                        "description": "", 
+                        "in": "path", 
+                        "name": "hubId", 
+                        "required": true, 
+                        "type": "string"
+                    }, 
+                    {
+                        "description": "", 
+                        "in": "body", 
+                        "name": "Hub", 
+                        "required": true, 
+                        "schema": {
+                            "$ref": "#/definitions/Hub"
+                        }
+                    }
+                ], 
+                "responses": {
+                    "200": {
+                        "description": "Success", 
+                        "schema": {
+                            "$ref": "#/definitions/Hub"
+                        }
+                    }, 
+                    "400": {
+                        "description": "Bad Request\n\nList of supported error codes:\n- 20: Invalid URL parameter value\n- 21: Missing body\n- 22: Invalid body\n- 23: Missing body field\n- 24: Invalid body field\n- 25: Missing header\n- 26: Invalid header value\n- 27: Missing query-string parameter\n- 28: Invalid query-string parameter value", 
+                        "schema": {
+                            "$ref": "#/definitions/ErrorRepresentation"
+                        }
+                    }, 
+                    "401": {
+                        "description": "Unauthorized\n\nList of supported error codes:\n- 40: Missing credentials\n- 41: Invalid credentials\n- 42: Expired credentials", 
+                        "schema": {
+                            "$ref": "#/definitions/ErrorRepresentation"
+                        }
+                    }, 
+                    "403": {
+                        "description": "Forbidden\n\nList of supported error codes:\n- 50: Access denied\n- 51: Forbidden requester\n- 52: Forbidden user\n- 53: Too many requests", 
+                        "schema": {
+                            "$ref": "#/definitions/ErrorRepresentation"
+                        }
+                    }, 
+                    "404": {
+                        "description": "Not Found\n\nList of supported error codes:\n- 60: Resource not found", 
+                        "schema": {
+                            "$ref": "#/definitions/ErrorRepresentation"
+                        }
+                    }, 
+                    "405": {
+                        "description": "Method Not Allowed\n\nList of supported error codes:\n- 61: Method not allowed", 
+                        "schema": {
+                            "$ref": "#/definitions/ErrorRepresentation"
+                        }
+                    }, 
+                    "409": {
+                        "description": "Conflict\n\n", 
+                        "schema": {
+                            "$ref": "#/definitions/ErrorRepresentation"
+                        }
+                    }, 
+                    "422": {
+                        "description": "Unprocessable entity\n\nFunctional error", 
+                        "schema": {
+                            "$ref": "#/definitions/ErrorRepresentation"
+                        }
+                    }, 
+                    "500": {
+                        "description": "Internal Server Error\n\nList of supported error codes:\n- 1: Internal error", 
+                        "schema": {
+                            "$ref": "#/definitions/ErrorRepresentation"
+                        }
+                    }, 
+                    "503": {
+                        "description": "Service Unavailable\n\nList of supported error codes:\n- 5: The service is temporarily unavailable\n- 6: Orange API is over capacity, retry later !", 
+                        "schema": {
+                            "$ref": "#/definitions/ErrorRepresentation"
+                        }
+                    }
+                }, 
+                "deprecated": false
+            }
+        }, 
+        "/serviceOrder": {
+            "get": {
+                "operationId": "serviceOrderFind", 
+                "summary": "List service orders", 
+                "description": "Retreive and list service order entities according to given criteria.\nAttribute selection is enabled for all first level attributes.\nFiltering may be available depending on the compliance level supported by an implementation. Providing filtering criteria is mandatory to avoid too many answers retrieved\n\nSpecific business errors for current operation will be encapsulated in\n\nHTTP Response 422 Unprocessable entity\n", 
+                "tags": [
+                    "ServiceOrder"
+                ], 
+                "parameters": [
+                    {
+                        "description": "Example of filtering attribute that can be used", 
+                        "in": "query", 
+                        "name": "state", 
+                        "required": false, 
+                        "type": "string"
+                    }, 
+                    {
+                        "description": "Example of filtering attribute that can be used", 
+                        "in": "query", 
+                        "name": "orderDate", 
+                        "required": false, 
+                        "type": "string"
+                    }, 
+                    {
+                        "description": "Example of filtering attribute that can be used", 
+                        "in": "query", 
+                        "name": "relatedPartyId", 
+                        "required": false, 
+                        "type": "string"
+                    }, 
+                    {
+                        "description": "Example of filtering attribute that can be used", 
+                        "in": "query", 
+                        "name": "relatedPartyRole", 
+                        "required": false, 
+                        "type": "string"
+                    }, 
+                    {
+                        "description": "Attribute selection", 
+                        "in": "query", 
+                        "name": "fields", 
+                        "required": false, 
+                        "type": "string"
+                    }, 
+                    {
+                        "description": "Requested index for start of resources to be provided in response requested by client", 
+                        "in": "query", 
+                        "name": "offset", 
+                        "required": false, 
+                        "type": "string"
+                    }, 
+                    {
+                        "description": "Requested number of resources to be provided in response requested by client", 
+                        "in": "query", 
+                        "name": "limit", 
+                        "required": false, 
+                        "type": "string"
+                    }
+                ], 
+                "responses": {
+                    "200": {
+                        "description": "Success", 
+                        "headers": {
+                            "X-Result-Count": {
+                                "description": "", 
+                                "format": "int32", 
+                                "type": "integer"
+                            }, 
+                            "X-Total-Count": {
+                                "description": "", 
+                                "format": "int32", 
+                                "type": "integer"
+                            }
+                        }, 
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/ServiceOrder"
+                            }, 
+                            "type": "array"
+                        }
+                    }, 
+                    "400": {
+                        "description": "Bad Request\n\nList of supported error codes:\n- 20: Invalid URL parameter value\n- 21: Missing body\n- 22: Invalid body\n- 23: Missing body field\n- 24: Invalid body field\n- 25: Missing header\n- 26: Invalid header value\n- 27: Missing query-string parameter\n- 28: Invalid query-string parameter value", 
+                        "schema": {
+                            "$ref": "#/definitions/ErrorRepresentation"
+                        }
+                    }, 
+                    "401": {
+                        "description": "Unauthorized\n\nList of supported error codes:\n- 40: Missing credentials\n- 41: Invalid credentials\n- 42: Expired credentials", 
+                        "schema": {
+                            "$ref": "#/definitions/ErrorRepresentation"
+                        }
+                    }, 
+                    "403": {
+                        "description": "Forbidden\n\nList of supported error codes:\n- 50: Access denied\n- 51: Forbidden requester\n- 52: Forbidden user\n- 53: Too many requests", 
+                        "schema": {
+                            "$ref": "#/definitions/ErrorRepresentation"
+                        }
+                    }, 
+                    "404": {
+                        "description": "Not Found\n\nList of supported error codes:\n- 60: Resource not found", 
+                        "schema": {
+                            "$ref": "#/definitions/ErrorRepresentation"
+                        }
+                    }, 
+                    "405": {
+                        "description": "Method Not Allowed\n\nList of supported error codes:\n- 61: Method not allowed", 
+                        "schema": {
+                            "$ref": "#/definitions/ErrorRepresentation"
+                        }
+                    }, 
+                    "409": {
+                        "description": "Conflict\n\n", 
+                        "schema": {
+                            "$ref": "#/definitions/ErrorRepresentation"
+                        }
+                    }, 
+                    "422": {
+                        "description": "Unprocessable entity\n\nFunctional error", 
+                        "schema": {
+                            "$ref": "#/definitions/ErrorRepresentation"
+                        }
+                    }, 
+                    "500": {
+                        "description": "Internal Server Error\n\nList of supported error codes:\n- 1: Internal error", 
+                        "schema": {
+                            "$ref": "#/definitions/ErrorRepresentation"
+                        }
+                    }, 
+                    "503": {
+                        "description": "Service Unavailable\n\nList of supported error codes:\n- 5: The service is temporarily unavailable\n- 6: Orange API is over capacity, retry later !", 
+                        "schema": {
+                            "$ref": "#/definitions/ErrorRepresentation"
+                        }
+                    }
+                }, 
+                "deprecated": false
+            }, 
+            "post": {
+                "operationId": "serviceOrderCreate", 
+                "summary": "Create a service order", 
+                "description": "This operation creates a service order entity.\nThe specification document provides the list of mandatory and non mandatory attributes when creating a ServiceOrder, including any possible rule conditions and applicable default values.\nPOST should be used without specifying the id and the href, the Service Order Management system is in charge of generating the id + href for the ServiceOrder.\n\nSpecific business errors for current operation will be encapsulated in\n\nHTTP Response 422 Unprocessable entity\n", 
+                "tags": [
+                    "ServiceOrder"
+                ], 
+                "parameters": [
+                    {
+                        "description": "", 
+                        "in": "body", 
+                        "name": "serviceOrder", 
+                        "required": true, 
+                        "schema": {
+                            "$ref": "#/definitions/POSTReqServiceOrder"
+                        }
+                    }
+                ], 
+                "responses": {
+                    "201": {
+                        "description": "Success", 
+                        "schema": {
+                            "$ref": "#/definitions/ServiceOrder"
+                        }
+                    }, 
+                    "400": {
+                        "description": "Bad Request\n\nList of supported error codes:\n- 20: Invalid URL parameter value\n- 21: Missing body\n- 22: Invalid body\n- 23: Missing body field\n- 24: Invalid body field\n- 25: Missing header\n- 26: Invalid header value\n- 27: Missing query-string parameter\n- 28: Invalid query-string parameter value", 
+                        "schema": {
+                            "$ref": "#/definitions/ErrorRepresentation"
+                        }
+                    }, 
+                    "401": {
+                        "description": "Unauthorized\n\nList of supported error codes:\n- 40: Missing credentials\n- 41: Invalid credentials\n- 42: Expired credentials", 
+                        "schema": {
+                            "$ref": "#/definitions/ErrorRepresentation"
+                        }
+                    }, 
+                    "403": {
+                        "description": "Forbidden\n\nList of supported error codes:\n- 50: Access denied\n- 51: Forbidden requester\n- 52: Forbidden user\n- 53: Too many requests", 
+                        "schema": {
+                            "$ref": "#/definitions/ErrorRepresentation"
+                        }
+                    }, 
+                    "404": {
+                        "description": "Not Found\n\nList of supported error codes:\n- 60: Resource not found", 
+                        "schema": {
+                            "$ref": "#/definitions/ErrorRepresentation"
+                        }
+                    }, 
+                    "405": {
+                        "description": "Method Not Allowed\n\nList of supported error codes:\n- 61: Method not allowed", 
+                        "schema": {
+                            "$ref": "#/definitions/ErrorRepresentation"
+                        }
+                    }, 
+                    "409": {
+                        "description": "Conflict\n\n", 
+                        "schema": {
+                            "$ref": "#/definitions/ErrorRepresentation"
+                        }
+                    }, 
+                    "422": {
+                        "description": "Unprocessable entity\n\nFunctional error", 
+                        "schema": {
+                            "$ref": "#/definitions/ErrorRepresentation"
+                        }
+                    }, 
+                    "500": {
+                        "description": "Internal Server Error\n\nList of supported error codes:\n- 1: Internal error", 
+                        "schema": {
+                            "$ref": "#/definitions/ErrorRepresentation"
+                        }
+                    }, 
+                    "503": {
+                        "description": "Service Unavailable\n\nList of supported error codes:\n- 5: The service is temporarily unavailable\n- 6: Orange API is over capacity, retry later !", 
+                        "schema": {
+                            "$ref": "#/definitions/ErrorRepresentation"
+                        }
+                    }
+                }, 
+                "deprecated": false
+            }
+        }, 
+        "/serviceOrder/{id}": {
+            "get": {
+                "operationId": "serviceOrderGet", 
+                "summary": "Retrieve a service order", 
+                "description": "This operation retrieves a service order entity. \nAttribute selection is enabled for all first level attributes.\n\nSpecific business errors for current operation will be encapsulated in\n\nHTTP Response 422 Unprocessable entity\n", 
+                "tags": [
+                    "ServiceOrder"
+                ], 
+                "parameters": [
+                    {
+                        "description": "", 
+                        "in": "path", 
+                        "name": "id", 
+                        "required": true, 
+                        "type": "string"
+                    }, 
+                    {
+                        "description": "Attribute selection", 
+                        "in": "query", 
+                        "name": "fields", 
+                        "required": false, 
+                        "type": "string"
+                    }
+                ], 
+                "responses": {
+                    "200": {
+                        "description": "Success", 
+                        "schema": {
+                            "$ref": "#/definitions/ServiceOrder"
+                        }
+                    }, 
+                    "400": {
+                        "description": "Bad Request\n\nList of supported error codes:\n- 20: Invalid URL parameter value\n- 21: Missing body\n- 22: Invalid body\n- 23: Missing body field\n- 24: Invalid body field\n- 25: Missing header\n- 26: Invalid header value\n- 27: Missing query-string parameter\n- 28: Invalid query-string parameter value", 
+                        "schema": {
+                            "$ref": "#/definitions/ErrorRepresentation"
+                        }
+                    }, 
+                    "401": {
+                        "description": "Unauthorized\n\nList of supported error codes:\n- 40: Missing credentials\n- 41: Invalid credentials\n- 42: Expired credentials", 
+                        "schema": {
+                            "$ref": "#/definitions/ErrorRepresentation"
+                        }
+                    }, 
+                    "403": {
+                        "description": "Forbidden\n\nList of supported error codes:\n- 50: Access denied\n- 51: Forbidden requester\n- 52: Forbidden user\n- 53: Too many requests", 
+                        "schema": {
+                            "$ref": "#/definitions/ErrorRepresentation"
+                        }
+                    }, 
+                    "404": {
+                        "description": "Not Found\n\nList of supported error codes:\n- 60: Resource not found", 
+                        "schema": {
+                            "$ref": "#/definitions/ErrorRepresentation"
+                        }
+                    }, 
+                    "405": {
+                        "description": "Method Not Allowed\n\nList of supported error codes:\n- 61: Method not allowed", 
+                        "schema": {
+                            "$ref": "#/definitions/ErrorRepresentation"
+                        }
+                    }, 
+                    "409": {
+                        "description": "Conflict\n\n", 
+                        "schema": {
+                            "$ref": "#/definitions/ErrorRepresentation"
+                        }
+                    }, 
+                    "422": {
+                        "description": "Unprocessable entity\n\nFunctional error", 
+                        "schema": {
+                            "$ref": "#/definitions/ErrorRepresentation"
+                        }
+                    }, 
+                    "500": {
+                        "description": "Internal Server Error\n\nList of supported error codes:\n- 1: Internal error", 
+                        "schema": {
+                            "$ref": "#/definitions/ErrorRepresentation"
+                        }
+                    }, 
+                    "503": {
+                        "description": "Service Unavailable\n\nList of supported error codes:\n- 5: The service is temporarily unavailable\n- 6: Orange API is over capacity, retry later !", 
+                        "schema": {
+                            "$ref": "#/definitions/ErrorRepresentation"
+                        }
+                    }
+                }, 
+                "deprecated": false
+            }, 
+            "patch": {
+                "operationId": "serviceOrderPatch", 
+                "summary": "Patch a service order", 
+                "description": "This operation allows partial updates of a service order entity. Support of json/merge (https://tools.ietf.org/html/rfc7386) is mandatory, support of json/patch (http://tools.ietf.org/html/rfc5789) is optional. \nThe  specification document provides the list of patchable and non patchable attributes, including constraint rules on their usage.\n\nSpecific business errors for current operation will be encapsulated in\n\nHTTP Response 422 Unprocessable entity\n", 
+                "tags": [
+                    "ServiceOrder"
+                ], 
+                "parameters": [
+                    {
+                        "description": "", 
+                        "in": "path", 
+                        "name": "id", 
+                        "required": true, 
+                        "type": "string"
+                    }, 
+                    {
+                        "description": "", 
+                        "in": "body", 
+                        "name": "serviceOrder", 
+                        "required": true, 
+                        "schema": {
+                            "$ref": "#/definitions/ServiceOrder"
+                        }
+                    }
+                ], 
+                "responses": {
+                    "200": {
+                        "description": "Success", 
+                        "schema": {
+                            "$ref": "#/definitions/ServiceOrder"
+                        }
+                    }, 
+                    "400": {
+                        "description": "Bad Request\n\nList of supported error codes:\n- 20: Invalid URL parameter value\n- 21: Missing body\n- 22: Invalid body\n- 23: Missing body field\n- 24: Invalid body field\n- 25: Missing header\n- 26: Invalid header value\n- 27: Missing query-string parameter\n- 28: Invalid query-string parameter value", 
+                        "schema": {
+                            "$ref": "#/definitions/ErrorRepresentation"
+                        }
+                    }, 
+                    "401": {
+                        "description": "Unauthorized\n\nList of supported error codes:\n- 40: Missing credentials\n- 41: Invalid credentials\n- 42: Expired credentials", 
+                        "schema": {
+                            "$ref": "#/definitions/ErrorRepresentation"
+                        }
+                    }, 
+                    "403": {
+                        "description": "Forbidden\n\nList of supported error codes:\n- 50: Access denied\n- 51: Forbidden requester\n- 52: Forbidden user\n- 53: Too many requests", 
+                        "schema": {
+                            "$ref": "#/definitions/ErrorRepresentation"
+                        }
+                    }, 
+                    "404": {
+                        "description": "Not Found\n\nList of supported error codes:\n- 60: Resource not found", 
+                        "schema": {
+                            "$ref": "#/definitions/ErrorRepresentation"
+                        }
+                    }, 
+                    "405": {
+                        "description": "Method Not Allowed\n\nList of supported error codes:\n- 61: Method not allowed", 
+                        "schema": {
+                            "$ref": "#/definitions/ErrorRepresentation"
+                        }
+                    }, 
+                    "409": {
+                        "description": "Conflict\n\n", 
+                        "schema": {
+                            "$ref": "#/definitions/ErrorRepresentation"
+                        }
+                    }, 
+                    "422": {
+                        "description": "Unprocessable entity\n\nFunctional error", 
+                        "schema": {
+                            "$ref": "#/definitions/ErrorRepresentation"
+                        }
+                    }, 
+                    "500": {
+                        "description": "Internal Server Error\n\nList of supported error codes:\n- 1: Internal error", 
+                        "schema": {
+                            "$ref": "#/definitions/ErrorRepresentation"
+                        }
+                    }, 
+                    "503": {
+                        "description": "Service Unavailable\n\nList of supported error codes:\n- 5: The service is temporarily unavailable\n- 6: Orange API is over capacity, retry later !", 
+                        "schema": {
+                            "$ref": "#/definitions/ErrorRepresentation"
+                        }
+                    }
+                }, 
+                "deprecated": false
+            }, 
+            "delete": {
+                "operationId": "serviceOrderDelete", 
+                "summary": "Delete a service order", 
+                "description": "This operation deletes a service order entity. This operation is available only to Admin API users.\n\nSpecific business errors for current operation will be encapsulated in\n\nHTTP Response 422 Unprocessable entity\n", 
+                "tags": [
+                    "ServiceOrder"
+                ], 
+                "parameters": [
+                    {
+                        "description": "", 
+                        "in": "path", 
+                        "name": "id", 
+                        "required": true, 
+                        "type": "string"
+                    }
+                ], 
+                "responses": {
+                    "204": {
+                        "description": "Success"
+                    }, 
+                    "400": {
+                        "description": "Bad Request\n\nList of supported error codes:\n- 20: Invalid URL parameter value\n- 21: Missing body\n- 22: Invalid body\n- 23: Missing body field\n- 24: Invalid body field\n- 25: Missing header\n- 26: Invalid header value\n- 27: Missing query-string parameter\n- 28: Invalid query-string parameter value", 
+                        "schema": {
+                            "$ref": "#/definitions/ErrorRepresentation"
+                        }
+                    }, 
+                    "401": {
+                        "description": "Unauthorized\n\nList of supported error codes:\n- 40: Missing credentials\n- 41: Invalid credentials\n- 42: Expired credentials", 
+                        "schema": {
+                            "$ref": "#/definitions/ErrorRepresentation"
+                        }
+                    }, 
+                    "403": {
+                        "description": "Forbidden\n\nList of supported error codes:\n- 50: Access denied\n- 51: Forbidden requester\n- 52: Forbidden user\n- 53: Too many requests", 
+                        "schema": {
+                            "$ref": "#/definitions/ErrorRepresentation"
+                        }
+                    }, 
+                    "404": {
+                        "description": "Not Found\n\nList of supported error codes:\n- 60: Resource not found", 
+                        "schema": {
+                            "$ref": "#/definitions/ErrorRepresentation"
+                        }
+                    }, 
+                    "405": {
+                        "description": "Method Not Allowed\n\nList of supported error codes:\n- 61: Method not allowed", 
+                        "schema": {
+                            "$ref": "#/definitions/ErrorRepresentation"
+                        }
+                    }, 
+                    "409": {
+                        "description": "Conflict\n\n", 
+                        "schema": {
+                            "$ref": "#/definitions/ErrorRepresentation"
+                        }
+                    }, 
+                    "422": {
+                        "description": "Unprocessable entity\n\nFunctional error", 
+                        "schema": {
+                            "$ref": "#/definitions/ErrorRepresentation"
+                        }
+                    }, 
+                    "500": {
+                        "description": "Internal Server Error\n\nList of supported error codes:\n- 1: Internal error", 
+                        "schema": {
+                            "$ref": "#/definitions/ErrorRepresentation"
+                        }
+                    }, 
+                    "503": {
+                        "description": "Service Unavailable\n\nList of supported error codes:\n- 5: The service is temporarily unavailable\n- 6: Orange API is over capacity, retry later !", 
+                        "schema": {
+                            "$ref": "#/definitions/ErrorRepresentation"
+                        }
+                    }
+                }, 
+                "deprecated": false
+            }
+        }
+    }, 
+    "definitions": {
+        "ActionType": {
+            "description": "", 
+            "enum": [
+                "add", 
+                "modify", 
+                "delete", 
+                "noChange"
+            ], 
+            "type": "string"
+        }, 
+        "AppointmentRef": {
+            "description": "Used to precise that an appointment was set-up with a related party for this order item", 
+            "properties": {
+                "@referredType": {
+                    "description": "", 
+                    "type": "string"
+                }, 
+                "href": {
+                    "description": "Reference of the appointmenrt", 
+                    "type": "string"
+                }, 
+                "id": {
+                    "description": "Unique identifier of the appointment", 
+                    "type": "string"
+                }
+            }, 
+            "required": [
+                "id", 
+                "href"
+            ], 
+            "type": "object"
+        }, 
+        "ErrorRepresentation": {
+            "description": "", 
+            "properties": {
+                "@schemaLocation": {
+                    "description": "it provides a link to the schema describing a REST resource", 
+                    "type": "string"
+                }, 
+                "@type": {
+                    "description": "The class type of a REST resource", 
+                    "type": "string"
+                }, 
+                "code": {
+                    "description": "Application related code (as defined in the API or from a common list)", 
+                    "format": "int32", 
+                    "type": "integer"
+                }, 
+                "message": {
+                    "description": "Text that provide more details and corrective actions related to the error. This can be shown to a client user", 
+                    "type": "string"
+                }, 
+                "reason": {
+                    "description": "Text that explains the reason for error. This can be shown to a client user.", 
+                    "type": "string"
+                }, 
+                "referenceError": {
+                    "description": "url pointing to documentation describing the error", 
+                    "type": "string"
+                }, 
+                "status": {
+                    "description": "http error code extension like 400-2", 
+                    "type": "string"
+                }
+            }, 
+            "required": [
+                "code", 
+                "reason"
+            ], 
+            "type": "object"
+        }, 
+        "Hub": {
+            "description": "An Hub resource is uded by client side to subscribe to notification", 
+            "discriminator": "id", 
+            "properties": {
+                "callback": {
+                    "description": "", 
+                    "type": "string"
+                }, 
+                "id": {
+                    "description": "", 
+                    "type": "string"
+                }, 
+                "query": {
+                    "description": "", 
+                    "type": "string"
+                }
+            }, 
+            "type": "object"
+        }, 
+        "HubInput": {
+            "description": "", 
+            "properties": {
+                "callback": {
+                    "description": "", 
+                    "type": "string"
+                }, 
+                "query": {
+                    "description": "", 
+                    "type": "string"
+                }
+            }, 
+            "type": "object"
+        }, 
+        "Note": {
+            "description": "Extra-information about the order (e.g. useful to add extra delivery information that could be useful for a human process", 
+            "properties": {
+                "author": {
+                    "description": "Author of the note", 
+                    "type": "string"
+                }, 
+                "date": {
+                    "description": "Date of the note", 
+                    "format": "date", 
+                    "type": "string"
+                }, 
+                "text": {
+                    "description": "Text of the note", 
+                    "type": "string"
+                }
+            }, 
+            "type": "object"
+        }, 
+        "OrderItemRelationship": {
+            "description": "Linked order item to the one containing this attribute", 
+            "properties": {
+                "id": {
+                    "description": "Unique identifier of an order item", 
+                    "type": "string"
+                }, 
+                "type": {
+                    "description": "The type of related order item, can be : dependancy if the order item needs to be \u201cnot started\u201d until another order item is complete", 
+                    "type": "string"
+                }
+            }, 
+            "required": [
+                "type", 
+                "id"
+            ], 
+            "type": "object"
+        }, 
+        "OrderRelationship": {
+            "description": "Linked order to the one containing this attribute", 
+            "properties": {
+                "@referredType": {
+                    "description": "", 
+                    "type": "string"
+                }, 
+                "href": {
+                    "description": "A hyperlink to the related order", 
+                    "type": "string"
+                }, 
+                "id": {
+                    "description": "The id of the related order", 
+                    "type": "string"
+                }, 
+                "type": {
+                    "description": "The type of related order, can be : \u201cdependency\u201d if the order needs to be \u201cnot started\u201d until another order item is complete (a service order in this case) or \u201ccross-ref\u201d to keep track of the source order (a productOrder)", 
+                    "type": "string"
+                }
+            }, 
+            "required": [
+                "id"
+            ], 
+            "type": "object"
+        }, 
+        "POSTReqServiceOrder": {
+            "description": "This stucture is used in the request of a POST service Order.\nall attributes not expected to be in request have been removed.", 
+            "properties": {
+                "@baseType": {
+                    "description": "", 
+                    "type": "string"
+                }, 
+                "@schemaLocation": {
+                    "description": "", 
+                    "type": "string"
+                }, 
+                "@type": {
+                    "description": "", 
+                    "type": "string"
+                }, 
+                "category": {
+                    "description": "Used to categorize the order that can be useful for the OM system (e.g. \u201cbroadband\u201d, \u201cTVOption\u201d, ...)", 
+                    "type": "string"
+                }, 
+                "description": {
+                    "description": "A free-text description of the service order", 
+                    "type": "string"
+                }, 
+                "externalId": {
+                    "description": "ID given by the consumer and only understandable by him (to facilitate his searches)", 
+                    "type": "string"
+                }, 
+                "note": {
+                    "$ref": "#/definitions/Note"
+                }, 
+                "notificationContact": {
+                    "description": "Contact attached to the order to send back information regarding this order", 
+                    "type": "string"
+                }, 
+                "orderItem": {
+                    "items": {
+                        "$ref": "#/definitions/POSTReqServiceOrderItem"
+                    }, 
+                    "type": "array"
+                }, 
+                "orderRelationship": {
+                    "items": {
+                        "$ref": "#/definitions/OrderRelationship"
+                    }, 
+                    "type": "array"
+                }, 
+                "priority": {
+                    "description": "A way that can be used by consumers to prioritize orders in Service Order Management system (from 0 to 4 : 0 is the highest priority, and 4 the lowest)", 
+                    "type": "string"
+                }, 
+                "relatedParty": {
+                    "items": {
+                        "$ref": "#/definitions/RelatedParty"
+                    }, 
+                    "type": "array"
+                }, 
+                "requestedCompletionDate": {
+                    "description": "Requested delivery date from the requestor perspective", 
+                    "format": "date-time", 
+                    "type": "string"
+                }, 
+                "requestedStartDate": {
+                    "description": "Order start date wished by the requestor", 
+                    "format": "date-time", 
+                    "type": "string"
+                }
+            }, 
+            "type": "object"
+        }, 
+        "POSTReqServiceOrderItem": {
+            "description": "specific structure for POST Request", 
+            "properties": {
+                "@baseType": {
+                    "description": "", 
+                    "type": "string"
+                }, 
+                "@schemaLocation": {
+                    "description": "", 
+                    "type": "string"
+                }, 
+                "@type": {
+                    "description": "", 
+                    "type": "string"
+                }, 
+                "action": {
+                    "$ref": "#/definitions/ActionType"
+                }, 
+                "appointment": {
+                    "$ref": "#/definitions/AppointmentRef"
+                }, 
+                "id": {
+                    "description": "Identifier of the line item (generally it is a sequence number 01, 02, 03, \u2026)", 
+                    "type": "string"
+                }, 
+                "orderItemRelationship": {
+                    "items": {
+                        "$ref": "#/definitions/OrderItemRelationship"
+                    }, 
+                    "type": "array"
+                }, 
+                "service": {
+                    "$ref": "#/definitions/Service"
+                }
+            }, 
+            "required": [
+                "id", 
+                "service"
+            ], 
+            "type": "object"
+        }, 
+        "Place": {
+            "description": "Used to defined a place useful for the service (for example a delivery geographical place)", 
+            "properties": {
+                "@referredType": {
+                    "description": "", 
+                    "type": "string"
+                }, 
+                "@schemaLocation": {
+                    "description": "", 
+                    "type": "string"
+                }, 
+                "href": {
+                    "description": "Reference of a place (for instance in google map)", 
+                    "type": "string"
+                }, 
+                "id": {
+                    "description": "", 
+                    "type": "string"
+                }, 
+                "name": {
+                    "description": "", 
+                    "type": "string"
+                }, 
+                "role": {
+                    "description": "The role of the place (e.g. delivery address, install site etc)", 
+                    "type": "string"
+                }
+            }, 
+            "required": [
+                "role"
+            ], 
+            "type": "object"
+        }, 
+        "RelatedParty": {
+            "description": "A related party defines party which are involved in this order and the role they are playing", 
+            "properties": {
+                "@referredType": {
+                    "description": "", 
+                    "type": "string"
+                }, 
+                "href": {
+                    "description": "An hyperlink to the party", 
+                    "type": "string"
+                }, 
+                "id": {
+                    "description": "Unique identifier of a related party", 
+                    "type": "string"
+                }, 
+                "name": {
+                    "description": "Name of the related party", 
+                    "type": "string"
+                }, 
+                "role": {
+                    "description": "The role of the related party (e.g. Owner, requester, fullfiller etc)", 
+                    "type": "string"
+                }
+            }, 
+            "required": [
+                "id", 
+                "role"
+            ], 
+            "type": "object"
+        }, 
+        "Service": {
+            "description": "Service attributes description (these are as per the Service ODE model as used in the Service Inventory specification)", 
+            "properties": {
+                "@schemaLocation": {
+                    "description": "", 
+                    "type": "string"
+                }, 
+                "@type": {
+                    "description": "", 
+                    "type": "string"
+                }, 
+                "href": {
+                    "description": "Reference to the owned Service (useful for delete or modify command)", 
+                    "type": "string"
+                }, 
+                "id": {
+                    "description": "Identifier of a service instance", 
+                    "type": "string"
+                }, 
+                "name": {
+                    "description": "Name of the service", 
+                    "type": "string"
+                }, 
+                "place": {
+                    "items": {
+                        "$ref": "#/definitions/Place"
+                    }, 
+                    "type": "array"
+                }, 
+                "relatedParty": {
+                    "items": {
+                        "$ref": "#/definitions/RelatedParty"
+                    }, 
+                    "type": "array"
+                }, 
+                "serviceCharacteristic": {
+                    "items": {
+                        "$ref": "#/definitions/ServiceCharacteristic"
+                    }, 
+                    "type": "array"
+                }, 
+                "serviceRelationship": {
+                    "items": {
+                        "$ref": "#/definitions/ServiceRelationship"
+                    }, 
+                    "type": "array"
+                }, 
+                "serviceSpecification": {
+                    "$ref": "#/definitions/ServiceSpecificationRef"
+                }, 
+                "serviceState": {
+                    "description": "The lifecycle state of the service", 
+                    "type": "string"
+                }, 
+                "type": {
+                    "description": "", 
+                    "type": "string"
+                }
+            }, 
+            "required": [
+                "id"
+            ], 
+            "type": "object"
+        }, 
+        "ServiceCharacteristic": {
+            "description": "ServiceCharacteristic", 
+            "properties": {
+                "name": {
+                    "description": "Name of characteristic", 
+                    "type": "string"
+                }, 
+                "value": {
+                    "$ref": "#/definitions/Value"
+                }, 
+                "valueType": {
+                    "description": "", 
+                    "type": "string"
+                }
+            }, 
+            "required": [
+                "name"
+            ], 
+            "type": "object"
+        }, 
+        "ServiceOrder": {
+            "description": "A Service Order is a type of order which can be used to place an order between a customer and a service provider or between a service provider and a partner and vice versa", 
+            "properties": {
+                "@baseType": {
+                    "description": "", 
+                    "type": "string"
+                }, 
+                "@schemaLocation": {
+                    "description": "", 
+                    "type": "string"
+                }, 
+                "@type": {
+                    "description": "", 
+                    "type": "string"
+                }, 
+                "category": {
+                    "description": "Used to categorize the order that can be useful for the OM system (e.g. \u201cbroadband\u201d, \u201cTVOption\u201d, ...)", 
+                    "type": "string"
+                }, 
+                "completionDate": {
+                    "description": "", 
+                    "type": "string"
+                }, 
+                "description": {
+                    "description": "A free-text description of the service order", 
+                    "type": "string"
+                }, 
+                "expectedCompletionDate": {
+                    "description": "Expected delivery date amended by the provider", 
+                    "format": "date-time", 
+                    "type": "string"
+                }, 
+                "externalId": {
+                    "description": "ID given by the consumer and only understandable by him (to facilitate his searches)", 
+                    "type": "string"
+                }, 
+                "href": {
+                    "description": "Hyperlink to access the order", 
+                    "type": "string"
+                }, 
+                "id": {
+                    "description": "ID created on repository side", 
+                    "type": "string"
+                }, 
+                "note": {
+                    "$ref": "#/definitions/Note"
+                }, 
+                "notificationContact": {
+                    "description": "Contact attached to the order to send back information regarding this order", 
+                    "type": "string"
+                }, 
+                "orderDate": {
+                    "description": "", 
+                    "format": "date-time", 
+                    "type": "string"
+                }, 
+                "orderItem": {
+                    "items": {
+                        "$ref": "#/definitions/ServiceOrderItem"
+                    }, 
+                    "type": "array"
+                }, 
+                "orderRelationship": {
+                    "items": {
+                        "$ref": "#/definitions/OrderRelationship"
+                    }, 
+                    "type": "array"
+                }, 
+                "priority": {
+                    "description": "A way that can be used by consumers to prioritize orders in Service Order Management system (from 0 to 4 : 0 is the highest priority, and 4 the lowest)", 
+                    "type": "string"
+                }, 
+                "relatedParty": {
+                    "items": {
+                        "$ref": "#/definitions/RelatedParty"
+                    }, 
+                    "type": "array"
+                }, 
+                "requestedCompletionDate": {
+                    "description": "Requested delivery date from the requestor perspective", 
+                    "format": "date-time", 
+                    "type": "string"
+                }, 
+                "requestedStartDate": {
+                    "description": "Order start date wished by the requestor", 
+                    "format": "date-time", 
+                    "type": "string"
+                }, 
+                "startDate": {
+                    "description": "Date when the order was started for processing", 
+                    "format": "date-time", 
+                    "type": "string"
+                }, 
+                "state": {
+                    "$ref": "#/definitions/StateType"
+                }
+            }, 
+            "required": [
+                "id"
+            ], 
+            "type": "object"
+        }, 
+        "ServiceOrderItem": {
+            "description": "An identified part of the order. A service order is decomposed into one or more order items.", 
+            "properties": {
+                "@baseType": {
+                    "description": "", 
+                    "type": "string"
+                }, 
+                "@schemaLocation": {
+                    "description": "", 
+                    "type": "string"
+                }, 
+                "@type": {
+                    "description": "", 
+                    "type": "string"
+                }, 
+                "action": {
+                    "$ref": "#/definitions/ActionType"
+                }, 
+                "appointment": {
+                    "$ref": "#/definitions/AppointmentRef"
+                }, 
+                "id": {
+                    "description": "Identifier of the line item (generally it is a sequence number 01, 02, 03, \u2026)", 
+                    "type": "string"
+                }, 
+                "orderItemRelationship": {
+                    "items": {
+                        "$ref": "#/definitions/OrderItemRelationship"
+                    }, 
+                    "type": "array"
+                }, 
+                "service": {
+                    "$ref": "#/definitions/Service"
+                }, 
+                "state": {
+                    "$ref": "#/definitions/StateType"
+                }
+            }, 
+            "required": [
+                "id", 
+                "service"
+            ], 
+            "type": "object"
+        }, 
+        "ServiceRef": {
+            "description": "Service references", 
+            "properties": {
+                "href": {
+                    "description": "Reference of the service", 
+                    "type": "string"
+                }, 
+                "id": {
+                    "description": "Unique identifier of the service", 
+                    "type": "string"
+                }
+            }, 
+            "required": [
+                "id"
+            ], 
+            "type": "object"
+        }, 
+        "ServiceRelationship": {
+            "description": "Linked Services to the one instantiate", 
+            "properties": {
+                "service": {
+                    "$ref": "#/definitions/Service"
+                }, 
+                "type": {
+                    "description": "Relationship type. It can be : \u201creliesOn\u201d if the Service needs another already owned Service to rely on (e.g. an option on an already owned mobile access Service) or \u201ctargets\u201d or \u201cisTargeted\u201d (depending on the way of expressing the link) for any other kind of links that may be useful", 
+                    "type": "string"
+                }
+            }, 
+            "required": [
+                "type", 
+                "service"
+            ], 
+            "type": "object"
+        }, 
+        "ServiceSpecificationRef": {
+            "description": "The service specification (default values, etc. are fetched from the catalogue).", 
+            "properties": {
+                "@baseType": {
+                    "description": "", 
+                    "type": "string"
+                }, 
+                "@schemaLocation": {
+                    "description": "", 
+                    "type": "string"
+                }, 
+                "@type": {
+                    "description": "", 
+                    "type": "string"
+                }, 
+                "href": {
+                    "description": "Reference of the service specification", 
+                    "type": "string"
+                }, 
+                "id": {
+                    "description": "Unique identifier of the service specification", 
+                    "type": "string"
+                }, 
+                "name": {
+                    "description": "", 
+                    "type": "string"
+                }, 
+                "targetServiceSchema": {
+                    "$ref": "#/definitions/TargetServiceSchema"
+                }, 
+                "version": {
+                    "description": "", 
+                    "type": "string"
+                }
+            }, 
+            "required": [
+                "id"
+            ], 
+            "type": "object"
+        }, 
+        "StateType": {
+            "description": "", 
+            "enum": [
+                "acknowledged", 
+                "rejected", 
+                "pending", 
+                "held", 
+                "inProgress", 
+                "cancelled", 
+                "completed", 
+                "failed", 
+                "partial"
+            ], 
+            "type": "string"
+        }, 
+        "TargetServiceSchema": {
+            "description": "", 
+            "properties": {
+                "@schemaLocation": {
+                    "description": "", 
+                    "type": "string"
+                }, 
+                "@type": {
+                    "description": "", 
+                    "type": "string"
+                }
+            }, 
+            "required": [
+                "@type", 
+                "@schemaLocation"
+            ], 
+            "type": "object"
+        }, 
+        "Value": {
+            "description": "Value is a descriptive structure for service characteristic", 
+            "properties": {
+                "@schemaLocation": {
+                    "description": "", 
+                    "type": "string"
+                }, 
+                "@type": {
+                    "description": "", 
+                    "type": "string"
+                }
+            }, 
+            "type": "object"
+        }
+    }, 
+    "tags": [
+        {
+            "description": "", 
+            "name": "ServiceOrder"
+        }, 
+        {
+            "description": "HUB API is used by client side to subscribe to notification", 
+            "name": "Hub"
+        }
+    ]
+}

@@ -1,0 +1,39 @@
+{
+    "externalId": "OrangeBSS748",
+    "priority": "1",
+    "description": "Service order description",
+    "category": "TMF resource illustration",
+    "requestedStartDate": "2018-01-15T09:37:40.508Z",
+    "requestedCompletionDate": "2018-01-15T09:37:40.508Z",
+    "@type": "ServiceOrder",
+    "orderItem": [
+	{
+	    "id": "1",
+	    "action": "add",
+	    "@type": "ServiceOrder",
+	    "service": {
+		"serviceState": "active",
+		"type": "CFS",
+		"serviceCharacteristic": [
+		    {
+			"name":"vCPE_IP",
+			"valueType":"object",
+			"value":{
+			    "@type":"IPAddress",
+			    "@schemaLocation":"http://my.schemas/IPAddress.schema.json",
+			    "vCPE_IP":"193.218.236.26"
+			}
+		    }
+		],
+		"serviceSpecification": {
+		    "id": "12",
+		    "href": "http://...:serviceSpecification/12",
+		    "name": "vCPE",
+		    "version": "1",
+		    "@type": "vCPE",
+		    "@schemaLocation": "http..."
+		}
+	    }
+	}
+    ]
+}

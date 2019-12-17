@@ -1,0 +1,48 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#", 
+    "$id": "ServiceSpecificationRef.schema.json", 
+    "title": "ServiceSpecificationRef", 
+    "definitions": {
+        "ServiceSpecificationRef": {
+            "type": "object", 
+            "description": "The service specification (default values, etc. are fetched from the catalogue).", 
+            "properties": {
+                "@baseType": {
+                    "type": "string"
+                }, 
+                "@schemaLocation": {
+                    "type": "string"
+                }, 
+                "@type": {
+                    "type": "string"
+                }, 
+                "href": {
+                    "type": "string", 
+                    "description": "Reference of the service specification"
+                }, 
+                "id": {
+                    "type": "string", 
+                    "description": "Unique identifier of the service specification"
+                }, 
+                "name": {
+                    "type": "string"
+                }, 
+                "targetServiceSchema": {
+                    "$ref": "TargetServiceSchema.schema.json#/definitions/TargetServiceSchema"
+                }, 
+                "version": {
+                    "type": "string"
+                }, 
+                "@referredType": {
+                    "type": "string", 
+                    "description": "The actual type of the target instance when needed for disambiguation."
+                }
+            }, 
+            "allOf": [
+                {
+                    "$ref": "CommonComponents.schema.json#/definitions/polymorphicPattern"
+                }
+            ]
+        }
+    }
+}

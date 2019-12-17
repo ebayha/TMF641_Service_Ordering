@@ -1,0 +1,14 @@
+
+- Adding in top of "Service order resource" chapter the following description:
+
+A Service Order is a type of order which can be used to describe a group of operations on service – one service order item per service. An action at the level of the service order item describe the operation to be done on a service (add, changer, terminate for example). The service order is triggered from the BSS system in charge of the product order management to the SOM (Service order Management) system that will manage the service fulfillment.
+
+- replacing the content of  "Lifecycle" chapter with more riche content in file StateMachine_complements.docx file in the template/ directory
+
+- In "Create Service Order" operation, adding the content found in CreateOperation_Complements.docs
+
+- In "Patch Service" operation, replacing the tables by the content found in CreateOperation_Complements.docs
+
+- Fixing the example of create: adding the fields=href,id parameter in order to make valid the response.
+
+- Updating the table of contents

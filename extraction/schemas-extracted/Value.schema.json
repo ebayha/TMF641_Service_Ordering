@@ -1,0 +1,21 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#", 
+    "$id": "Value.schema.json", 
+    "title": "Value", 
+    "definitions": {
+        "Value": {
+            "type": "object", 
+            "description": "Value is a descriptive structure for service characteristic", 
+            "properties": {
+                "@schemaLocation": {
+                    "type": "string", 
+                    "description": ""
+                }, 
+                "@type": {
+                    "type": "string", 
+                    "description": ""
+                }
+            }
+        }
+    }
+}

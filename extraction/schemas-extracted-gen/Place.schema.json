@@ -1,0 +1,38 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#", 
+    "$id": "Place.schema.json", 
+    "title": "Place", 
+    "definitions": {
+        "Place": {
+            "type": "object", 
+            "description": "Used to defined a place useful for the service (for example a delivery geographical place)", 
+            "properties": {
+                "@referredType": {
+                    "type": "string"
+                }, 
+                "@schemaLocation": {
+                    "type": "string"
+                }, 
+                "href": {
+                    "type": "string", 
+                    "description": "Reference of a place (for instance in google map)"
+                }, 
+                "id": {
+                    "type": "string"
+                }, 
+                "name": {
+                    "type": "string"
+                }, 
+                "role": {
+                    "type": "string", 
+                    "description": "The role of the place (e.g. delivery address, install site etc)"
+                }
+            }, 
+            "allOf": [
+                {
+                    "$ref": "CommonComponents.schema.json#/definitions/polymorphicPattern"
+                }
+            ]
+        }
+    }
+}

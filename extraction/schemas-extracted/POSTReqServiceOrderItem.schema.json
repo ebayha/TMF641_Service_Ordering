@@ -1,0 +1,48 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#", 
+    "$id": "POSTReqServiceOrderItem.schema.json", 
+    "title": "POSTReqServiceOrderItem", 
+    "definitions": {
+        "POSTReqServiceOrderItem": {
+            "type": "object", 
+            "description": "specific structure for POST Request", 
+            "properties": {
+                "@baseType": {
+                    "type": "string", 
+                    "description": ""
+                }, 
+                "@schemaLocation": {
+                    "type": "string", 
+                    "description": ""
+                }, 
+                "@type": {
+                    "type": "string", 
+                    "description": ""
+                }, 
+                "action": {
+                    "$ref": "ActionType.schema.json#/definitions/ActionType"
+                }, 
+                "appointment": {
+                    "$ref": "AppointmentRef.schema.json#/definitions/AppointmentRef"
+                }, 
+                "id": {
+                    "type": "string", 
+                    "description": "Identifier of the line item (generally it is a sequence number 01, 02, 03, \u2026)"
+                }, 
+                "orderItemRelationship": {
+                    "type": "array", 
+                    "items": {
+                        "$ref": "OrderItemRelationship.schema.json#/definitions/OrderItemRelationship"
+                    }
+                }, 
+                "service": {
+                    "$ref": "Service.schema.json#/definitions/Service"
+                }
+            }, 
+            "required": [
+                "id", 
+                "service"
+            ]
+        }
+    }
+}

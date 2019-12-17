@@ -1,0 +1,26 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#", 
+    "$id": "Hub.schema.json", 
+    "title": "Hub", 
+    "definitions": {
+        "Hub": {
+            "type": "object", 
+            "description": "An Hub resource is uded by client side to subscribe to notification", 
+            "properties": {
+                "callback": {
+                    "type": "string", 
+                    "description": ""
+                }, 
+                "id": {
+                    "type": "string", 
+                    "description": ""
+                }, 
+                "query": {
+                    "type": "string", 
+                    "description": ""
+                }
+            }, 
+            "discriminator": "id"
+        }
+    }
+}

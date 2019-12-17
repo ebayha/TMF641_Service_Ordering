@@ -1,0 +1,26 @@
+{
+    "category": "a string ...", 
+    "completionDate": "a string ...", 
+    "description": "This  service order ...", 
+    "expectedCompletionDate": "2018-11-26T00:00", 
+    "externalId": "847", 
+    "href": "https:/host:port/tmf-api/serviceOrder/v1/serviceOrder/6061", 
+    "id": "6061", 
+    "note": {}, 
+    "notificationContact": "a string ...", 
+    "orderDate": "2018-11-26T00:00", 
+    "orderItem": [
+        {}
+    ], 
+    "orderRelationship": [
+        {}
+    ], 
+    "priority": "a string ...", 
+    "relatedParty": [
+        {}
+    ], 
+    "requestedCompletionDate": "2018-11-26T00:00", 
+    "requestedStartDate": "2018-11-26T00:00", 
+    "startDate": "2018-11-26T00:00", 
+    "state": {}
+}

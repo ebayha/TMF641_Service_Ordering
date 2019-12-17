@@ -1,0 +1,26 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#", 
+    "$id": "Note.schema.json", 
+    "title": "Note", 
+    "definitions": {
+        "Note": {
+            "type": "object", 
+            "description": "Extra-information about the order (e.g. useful to add extra delivery information that could be useful for a human process", 
+            "properties": {
+                "author": {
+                    "type": "string", 
+                    "description": "Author of the note"
+                }, 
+                "date": {
+                    "type": "string", 
+                    "format": "date", 
+                    "description": "Date of the note"
+                }, 
+                "text": {
+                    "type": "string", 
+                    "description": "Text of the note"
+                }
+            }
+        }
+    }
+}

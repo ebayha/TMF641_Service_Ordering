@@ -1,0 +1,24 @@
+{
+    "description": "Service order new description",
+    "requestedStartDate": "2018-01-16T09:37:40.508Z",
+    "requestedCompletionDate": "2018-01-17T09:37:40.508Z",
+    "orderItem": [
+	{
+	    "id": "1",
+	    "action": "add",
+	    "service": {
+		"serviceCharacteristic": [
+		    {
+			"name":"vCPE_IP",
+			"valueType":"object",
+			"value":{
+			    "@type":"IPAddress",
+			    "@schemaLocation":"http://my.schemas/IPAddress.schema.json",
+			    "vCPE_IP":"193.218.236.26"
+			}
+		    }
+		]
+	    }
+	}
+    ]
+}

@@ -1,0 +1,71 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#", 
+    "$id": "Service.schema.json", 
+    "title": "Service", 
+    "definitions": {
+        "Service": {
+            "type": "object", 
+            "description": "Service attributes description (these are as per the Service ODE model as used in the Service Inventory specification)", 
+            "properties": {
+                "@schemaLocation": {
+                    "type": "string", 
+                    "description": ""
+                }, 
+                "@type": {
+                    "type": "string", 
+                    "description": ""
+                }, 
+                "href": {
+                    "type": "string", 
+                    "description": "Reference to the owned Service (useful for delete or modify command)"
+                }, 
+                "id": {
+                    "type": "string", 
+                    "description": "Identifier of a service instance"
+                }, 
+                "name": {
+                    "type": "string", 
+                    "description": "Name of the service"
+                }, 
+                "place": {
+                    "type": "array", 
+                    "items": {
+                        "$ref": "Place.schema.json#/definitions/Place"
+                    }
+                }, 
+                "relatedParty": {
+                    "type": "array", 
+                    "items": {
+                        "$ref": "RelatedParty.schema.json#/definitions/RelatedParty"
+                    }
+                }, 
+                "serviceCharacteristic": {
+                    "type": "array", 
+                    "items": {
+                        "$ref": "ServiceCharacteristic.schema.json#/definitions/ServiceCharacteristic"
+                    }
+                }, 
+                "serviceRelationship": {
+                    "type": "array", 
+                    "items": {
+                        "$ref": "ServiceRelationship.schema.json#/definitions/ServiceRelationship"
+                    }
+                }, 
+                "serviceSpecification": {
+                    "$ref": "ServiceSpecificationRef.schema.json#/definitions/ServiceSpecificationRef"
+                }, 
+                "serviceState": {
+                    "type": "string", 
+                    "description": "The lifecycle state of the service"
+                }, 
+                "type": {
+                    "type": "string", 
+                    "description": ""
+                }
+            }, 
+            "required": [
+                "id"
+            ]
+        }
+    }
+}
