@@ -1,13 +1,14 @@
 ## API rule definitions
 
 api 'API ServiceOrdering':
-  doc: "## TMF API Reference :\ TMF 641 -\ Service Ordering Management\n\n## Release :\ 18.5 -\ Dec 2018\n\nThe Service Order API provides a standardized mechanism for managing Service Order, a type of order which can be used to place an order between a customer and a service provider or between a service provider and a partner and vice versa.\n\n### Service Order resource\nA service order will describe a list of service order items.  A service order item references an action on an existing  or  future  service.  By  service  we  designed  Customer Facing  Service  (CFS)  as  well  as  Resource Facing Service (RFS).\nFrom a component perspective, a service order should be available\n-\ from a Service Orchestration Component (and it could mix CFS and RFS)\n-\ from an Infrastructure Control & Management component (and it would have only RFS)\n\n### Service Order API performs the following operations on service order :\n-\ Retrieval of a service order or a collection of service orders depending on filter criteria\n-\ Partial update of a service order (including updating rules)\n-\ Creation of a service order (including default values and creation rules)\n-\ Deletion of service order (for administration purposes)\n-\ Notification of events on Service order\n\nCopyright © TM Forum 2018. All Rights Reserved"
+  doc: "## TMF API Reference :\ TMF 641 -\ Service Ordering Management\n\n Version 4.0 - Sprint S1 2020\n\nThe Service Order API provides a standardized mechanism for managing Service Order, a type of order which can be used to place an order between a customer and a service provider or between a service provider and a partner and vice versa.\n\n### Service Order resource\nA service order will describe a list of service order items.  A service order item references an action on an existing  or  future  service.  By  service  we  designed  Customer Facing  Service  (CFS)  as  well  as  Resource Facing Service (RFS).\nFrom a component perspective, a service order should be available\n-\ from a Service Orchestration Component (and it could mix CFS and RFS)\n-\ from an Infrastructure Control & Management component (and it would have only RFS)\n\n### Service Order API performs the following operations on service order :\n-\ Retrieval of a service order or a collection of service orders depending on filter criteria\n-\ Partial update of a service order (including updating rules)\n-\ Creation of a service order (including default values and creation rules)\n-\ Deletion of service order (for administration purposes)\n-\ Notification of events on Service ordern\n\n**cancelserviceOrder resource**\nThis resource is used to request a service order cancellation.\n\n**service Order API performs the following operations on cancel service order :**\n\n   -Retrieval of a cancel service order or a collection of cancel service orders \n   -Creation of a cancel service order \n   -Notification of events on cancel service order.\n\nCopyright © TM Forum 2019. All Rights Reserved"
   hostUrl: "https://serverRoot"
   basePath: "/tmf-api/serviceOrdering/v4/"
   version: "4.0.0"
   flavors: regular
   resources:
     - ServiceOrder
+    - CancelServiceOrder
   ## ServiceOrder
   rules ServiceOrder:
     operations: GET,POST,PATCH,DELETE
@@ -15,9 +16,34 @@ api 'API ServiceOrdering':
     hidden in post: orderDate, completionDate, expectedCompletionDate, startDate, state
     sub mandatory in patch/post:
        orderItem: id, action, service
-       relatedParty: name, role
-    patchable: ALL EXCEPT id, href, externalId, priority, state, orderDate, completionDate, orderItem.id, orderItem.action, orderItem.state
+       relatedParty: id, @referredType
+       note: text
+       appointment: id
+       orderRelationship: id, relationshipType
+       supportingResource: id
+       supportingService: id
+       serviceRelationship: id, relationshipType
+       serviceCharacteristic: name, value
+    patchable: ALL EXCEPT id, href, orderDate
     pre-conditions:
-      - When creating a service order (post) an order item should not have the state field valorized
-    notifications: create,attributeValueChange,stateChange,delete
-    
+      - When creating a service order (post) an order must not have the state field valued
+      - When creating a service order (post) an order item must not have the state field valued
+    notifications: 
+      - create
+      - attributeValueChange
+      - stateChange
+      - delete
+      - informationRequired
+  ## CancelServiceOrder
+  rules CancelServiceOrder:
+     operations: GET, POST
+     mandatory in post: ServiceOrder
+     hidden in post:  state, effectiveCancellationDate      
+     sub mandatory in patch/post:
+       ServiceOrder: id
+     pre-conditions:
+        - service order id must exist
+     notifications:
+     - create
+     - stateChange
+     - informationRequired
