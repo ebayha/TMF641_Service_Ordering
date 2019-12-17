@@ -1,0 +1,371 @@
+@startuml
+hide circle
+hide methods
+hide stereotype
+show <<Enumeration>> stereotype
+skinparam class {
+   BackgroundColor<<Enumeration>> #E6F5F7
+   BackgroundColor<<Ref>> #FFFFE0
+   BackgroundColor<<Pivot>> #FFFFFFF
+   BackgroundColor #FCF2E3
+}
+
+class ServiceOrder  <<Pivot>> {
+    cancellationDate : DateTime
+    cancellationReason : String
+    category : String
+    completionDate : DateTime
+    description : String
+    expectedCompletionDate : DateTime
+    externalId : String
+    href : String
+    id : String
+    notificationContact : String
+    orderDate : DateTime
+    priority : String
+    requestedCompletionDate : DateTime
+    requestedStartDate : DateTime
+    startDate : DateTime
+    state : ServiceOrderStateType
+    @baseType : String
+    @schemaLocation : Uri
+    @type : String
+}
+
+class ServiceOrderStateType <<Enumeration>> {
+    acknowledged
+    rejected
+    pending
+    held
+    inProgress
+    cancelled
+    completed
+    failed
+    partial
+    assessingCancellation
+    pendingCancellation
+}
+
+class Note  {
+    author : String
+    date : DateTime
+    id : String
+    text : String
+    @baseType : String
+    @schemaLocation : Uri
+    @type : String
+}
+
+class RelatedParty  {
+    href : String
+    id : String
+    name : String
+    role : String
+    @baseType : String
+    @referredType : String
+    @schemaLocation : Uri
+    @type : String
+}
+
+class ExternalReference  {
+    externalReferenceType : String
+    name : String
+    @baseType : String
+    @schemaLocation : Uri
+    @type : String
+}
+
+class ServiceOrderItem  {
+    action : OrderActionType
+    id : String
+    quantity : Integer
+    state : ServiceOrderItemStateType
+    @baseType : String
+    @schemaLocation : Uri
+    @type : String
+}
+
+class ServiceOrderItemStateType <<Enumeration>> {
+    acknowledged
+    rejected
+    pending
+    held
+    inProgress
+    cancelled
+    completed
+    failed
+    assessingCancellation
+    pendingCancellation
+}
+
+class ServiceOrderItemRelationship  {
+    relationshipType : String
+    @baseType : String
+    @schemaLocation : Uri
+    @type : String
+}
+
+class ServiceOrderItemRef  {
+    itemId : String
+    serviceOrderHref : String
+    serviceOrderId : String
+    @baseType : String
+    @referredType : String
+    @schemaLocation : Uri
+    @type : String
+}
+
+class ServiceRefOrValue  {
+    category : String
+    description : String
+    endDate : DateTime
+    hasStarted : Boolean
+    href : String
+    id : String
+    isServiceEnabled : Boolean
+    isStateful : Boolean
+    name : String
+    serviceDate : String
+    serviceType : String
+    startDate : DateTime
+    startMode : String
+    state : ServiceStateType
+    @baseType : String
+    @referredType : String
+    @schemaLocation : Uri
+    @type : String
+}
+
+class ServiceStateType <<Enumeration>> {
+    feasibilityChecked
+    designed
+    reserved
+    inactive
+    active
+    terminated
+}
+
+class ResourceRef  <<Ref>> {
+    href : String
+    id : String
+    name : String
+    value : String
+    @baseType : String
+    @referredType : String
+    @schemaLocation : Uri
+    @type : String
+}
+
+class RelatedServiceOrderItem  {
+    itemAction : OrderItemActionType
+    itemId : String
+    role : String
+    serviceOrderHref : String
+    serviceOrderId : String
+    @baseType : String
+    @referredType : String
+    @schemaLocation : Uri
+    @type : String
+}
+
+class OrderItemActionType <<Enumeration>> {
+    add
+    modify
+    delete
+    noChange
+}
+
+class ServiceRelationship  <<Ref>> {
+    href : String
+    id : String
+    name : String
+    relationshipType : String
+    @baseType : String
+    @referredType : String
+    @schemaLocation : Uri
+    @type : String
+}
+
+class Characteristic  {
+    id : String
+    name : String
+    value : Any
+    valueType : String
+    @baseType : String
+    @schemaLocation : Uri
+    @type : String
+}
+
+class CharacteristicRelationship  {
+    id : String
+    relationshipType : String
+    @baseType : String
+    @schemaLocation : Uri
+    @type : String
+}
+
+class Feature  {
+    id : String
+    isBundle : Boolean
+    isEnabled : Boolean
+    name : String
+    @baseType : String
+    @schemaLocation : Uri
+    @type : String
+}
+
+class ConstraintRef  <<Ref>> {
+    href : String
+    id : String
+    name : String
+    version : String
+    @baseType : String
+    @referredType : String
+    @schemaLocation : Uri
+    @type : String
+}
+
+class FeatureRelationship  {
+    id : String
+    name : String
+    relationshipType : String
+    validFor : TimePeriod
+    @baseType : String
+    @schemaLocation : Uri
+    @type : String
+}
+
+class RelatedManagedEntityRefOrValue  {
+    href : String
+    id : String
+    name : String
+    role : String
+    @baseType : String
+    @referredType : String
+    @schemaLocation : Uri
+    @type : String
+}
+
+class RelatedPlaceRefOrValue  {
+    href : String
+    id : String
+    name : String
+    role : String
+    @baseType : String
+    @referredType : String
+    @schemaLocation : Uri
+    @type : String
+}
+
+class ServiceSpecificationRef  <<Ref>> {
+    href : String
+    id : String
+    name : String
+    version : String
+    @baseType : String
+    @referredType : String
+    @schemaLocation : Uri
+    @type : String
+}
+
+class TargetServiceSchema  {
+    @baseType : String
+    @schemaLocation : String
+    @type : String
+}
+
+class AppointmentRef  <<Ref>> {
+    description : String
+    href : String
+    id : String
+    @baseType : String
+    @referredType : String
+    @schemaLocation : Uri
+    @type : String
+}
+
+class ServiceOrderRelationship  <<Ref>> {
+    href : String
+    id : String
+    relationshipType : String
+    @baseType : String
+    @referredType : String
+    @schemaLocation : Uri
+    @type : String
+}
+
+ServiceOrder *-right-> "1..*" ServiceOrderItem : serviceOrderItem
+
+ServiceOrderStateType <-left[hidden]- ServiceOrder
+
+ServiceOrder *-->  "0..*" Note : note
+
+ServiceOrder *-->  "0..*" RelatedParty : relatedParty
+
+Note "0..*" <-left-* ServiceRefOrValue : note
+
+ServiceOrderItem *-->  "0..1" ServiceRefOrValue : service
+
+ServiceOrderItem -right[hidden]-> ServiceOrderItemStateType
+
+ServiceRefOrValue *-right-> "0..*" ServiceRefOrValue : supportingService
+
+ServiceRefOrValue *-right-> "0..*" RelatedServiceOrderItem : serviceOrderItem
+
+ServiceRefOrValue *-->  "0..*" RelatedParty : relatedParty
+
+RelatedServiceOrderItem -right[hidden]-> ServiceStateType
+
+ServiceRefOrValue *-->  "0..*" ServiceRelationship : serviceRelationship
+
+RelatedParty <-left[hidden]- ServiceRelationship
+
+ServiceRefOrValue *-->  "0..*" Characteristic : serviceCharacteristic
+
+ServiceRelationship <-left[hidden]- Characteristic
+
+ServiceRefOrValue *-->  "0..*" Feature : feature
+
+Characteristic <-left[hidden]- Feature
+
+ServiceRelationship *-->  "0..*" Characteristic : ServiceRelationshipCharacteristic
+
+Feature *-->  "1..*" Characteristic : featureCharacteristic
+
+ServiceRefOrValue *-->  "0..*" RelatedPlaceRefOrValue : place
+
+Characteristic <-left[hidden]- RelatedPlaceRefOrValue
+
+ServiceRefOrValue *-->  "0..*" ResourceRef : supportingResource
+
+RelatedPlaceRefOrValue <-left[hidden]- ResourceRef
+
+ServiceRefOrValue *-->  "0..*" RelatedManagedEntityRefOrValue : relatedManagedEntity
+
+ResourceRef <-left[hidden]- RelatedManagedEntityRefOrValue
+
+ServiceRefOrValue *-->  "0..1" ServiceSpecificationRef : serviceSpecification
+
+RelatedManagedEntityRefOrValue <-left[hidden]- ServiceSpecificationRef
+
+ExternalReference "0..*" <--* ServiceOrder : externalReference
+
+ServiceOrderRelationship "0..*" <--* ServiceOrder : orderRelationship
+
+AppointmentRef "0..1" <--* ServiceOrderItem : appointment
+
+ServiceOrderItemRelationship "0..*" <--* ServiceOrderItem : serviceOrderItemRelationship
+
+Feature *-right-> "0..*" ConstraintRef : constraint
+
+FeatureRelationship "0..*" <--* Feature : featureRelationship
+
+ServiceOrderItemRelationship *-right-> "0..1" ServiceOrderItemRef : orderItem
+
+Characteristic *-->  "0..*" CharacteristicRelationship : characteristicRelationship
+
+ServiceSpecificationRef *-->  "0..1" TargetServiceSchema : targetServiceSchema
+
+ServiceStateType -right[hidden]-> OrderItemActionType
+
+@enduml
