@@ -14,7 +14,7 @@
                 },
                 "action": {
                     "description": "The action to be carried out on the Service. Can be: add, modify, delete, noChange",
-                    "$ref": "OrderActionType.schema.json#/definitions/OrderActionType"
+                    "$ref": "OrderItemActionType.schema.json#/definitions/OrderItemActionType"
                 }, 
                 "quantity": {
                     "type": "integer",
