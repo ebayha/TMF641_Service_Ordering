@@ -2656,7 +2656,7 @@
                     "description": "Quantity ordered"
                 },
                 "action": {
-                    "$ref": "#/definitions/OrderActionType",
+                    "$ref": "#/definitions/OrderItemActionType",
                     "description": "The action to be carried out on the Service. Can be: add, modify, delete, noChange"
                 },
                 "appointment": {
